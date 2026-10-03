@@ -10,11 +10,12 @@ from typing import Tuple, Optional
 from services.embedding_service import EmbeddingService
 from services.pinecone_service import PineconeService
 from utils.get_api_key import get_key
+from config.settings import get_default_embedding_provider
 
 
 def create_services_from_auth(
     auth: dict,
-    embedding_provider: str = "openai",
+    embedding_provider: Optional[str] = None,
     embedding_model: Optional[str] = None
 ) -> Tuple[EmbeddingService, PineconeService]:
     """
@@ -28,7 +29,7 @@ def create_services_from_auth(
     Args:
         auth: Authentication object containing subscription info
               Expected format: { "api_key": obj, "subscription": obj }
-        embedding_provider: Provider to use ("openai", "voyageai", "cohere")
+        embedding_provider: Provider to use ("ollama", "openai", "voyageai", "cohere")
         embedding_model: Optional specific model name
         
     Returns:
@@ -39,6 +40,7 @@ def create_services_from_auth(
         >>> # Services are ready to use!
     """
     subscription = auth["subscription"]
+    embedding_provider = embedding_provider or get_default_embedding_provider()
     
     # Get all keys in one call (cached for efficiency)
     openai_api_key, pinecone_api_key, pinecone_index_name, pinecone_env = get_key(subscription)
@@ -47,7 +49,7 @@ def create_services_from_auth(
     embedding_service = EmbeddingService(
         model_provider=embedding_provider,
         model_name=embedding_model,
-        openai_key=openai_api_key
+        openai_key=openai_api_key if embedding_provider == "openai" else None,
     )
     
     # Initialize Pinecone service
@@ -62,7 +64,7 @@ def create_services_from_auth(
 
 def create_embedding_service(
     auth: dict,
-    embedding_provider: str = "openai",
+    embedding_provider: Optional[str] = None,
     embedding_model: Optional[str] = None
 ) -> EmbeddingService:
     """
@@ -72,19 +74,20 @@ def create_embedding_service(
     
     Args:
         auth: Authentication object containing subscription info
-        embedding_provider: Provider to use ("openai", "voyageai", "cohere")
+        embedding_provider: Provider to use ("ollama", "openai", "voyageai", "cohere")
         embedding_model: Optional specific model name
         
     Returns:
         Configured EmbeddingService instance
     """
     subscription = auth["subscription"]
+    embedding_provider = embedding_provider or get_default_embedding_provider()
     openai_api_key, _, _, _ = get_key(subscription)
     
     return EmbeddingService(
         model_provider=embedding_provider,
         model_name=embedding_model,
-        openai_key=openai_api_key
+        openai_key=openai_api_key if embedding_provider == "openai" else None,
     )
 
 

@@ -337,14 +337,19 @@ async def insert_vector(
             raise HTTPException(status_code=400, detail="metadata.doc_id is required")
 
         # Extract embedding model from request
-        embedding_provider = request.get("embedding_provider", "openai")
+        from config.settings import SUPPORTED_EMBEDDING_PROVIDERS, get_default_embedding_provider
+
+        embedding_provider = request.get("embedding_provider", get_default_embedding_provider())
         embedding_model = request.get("embedding_model", None)
         
         # Validate provider
-        if embedding_provider not in ["openai", "voyageai", "cohere"]:
+        if embedding_provider not in SUPPORTED_EMBEDDING_PROVIDERS:
             raise HTTPException(
-                status_code=400, 
-                detail=f"Unsupported embedding provider: {embedding_provider}. Supported: openai, voyageai, cohere"
+                status_code=400,
+                detail=(
+                    f"Unsupported embedding provider: {embedding_provider}. "
+                    f"Supported: {', '.join(SUPPORTED_EMBEDDING_PROVIDERS)}"
+                ),
             )
 
         # Extract org/project from API key

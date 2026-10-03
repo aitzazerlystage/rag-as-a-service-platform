@@ -5,7 +5,7 @@ Supports both local (Chroma/FAISS) and Pinecone backends
 
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any, Optional
-from langchain.schema import Document
+from langchain_core.documents import Document
 from langchain_openai import OpenAIEmbeddings
 import os
 from dotenv import load_dotenv

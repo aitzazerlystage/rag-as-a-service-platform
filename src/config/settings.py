@@ -9,41 +9,63 @@ from typing import Optional
 # OPENAI_API_KEY = ""
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 
-# LLM Configuration
-LLM_MODEL = "gpt-4o"
+# LLM Configuration (local Ollama)
+LLM_MODEL = "qwen3:4b-instruct"
 LLM_TEMPERATURE = 0.3
 LLM_MAX_TOKENS = 4000
+OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+# LLM_MODEL = "gpt-4o"  # OpenAI (replaced by Ollama)
 
-# Embedding Configuration - Set to 1024 dimensions to match Pinecone index
-EMBEDDING_MODEL = "text-embedding-3-small"  # This produces 1024 dimensions
-EMBEDDING_DIMENSIONS = 1536  # Explicitly set dimension requirement
+# Embedding Configuration — Pinecone index dimension (all stored vectors)
+PINECONE_INDEX_DIMENSIONS = 1024
+EMBEDDING_MODEL = "nomic-embed-text-v1.5"
+EMBEDDING_DIMENSIONS = PINECONE_INDEX_DIMENSIONS
 
 # Multiple Embedding Provider Configuration
+# "model_dimensions" = native API output; "dimensions" = Pinecone index size (after align)
 EMBEDDING_PROVIDERS = {
+    "nomic": {
+        "models": ["nomic-embed-text-v1.5", "nomic-embed-text-v1"],
+        "default": "nomic-embed-text-v1.5",
+        "model_dimensions": 768,
+        "dimensions": PINECONE_INDEX_DIMENSIONS,
+    },
+    "ollama": {
+        "models": ["nomic-embed-text", "mxbai-embed-large"],
+        "default": "nomic-embed-text",
+        "model_dimensions": 768,
+        "dimensions": PINECONE_INDEX_DIMENSIONS,
+    },
     "openai": {
         "models": ["text-embedding-3-small", "text-embedding-3-large"],
         "default": "text-embedding-3-small",
-        "dimensions": 1024
+        "model_dimensions": 1024,
+        "dimensions": PINECONE_INDEX_DIMENSIONS,
     },
     "voyageai": {
         "models": ["voyage-3", "voyage-3.5"],
         "default": "voyage-3.5",
-        "dimensions": 1024
+        "model_dimensions": 1024,
+        "dimensions": PINECONE_INDEX_DIMENSIONS,
     },
     "cohere": {
         "models": ["embed-english-v3.0"],
         "default": "embed-english-v3.0",
-        "dimensions": 1024
-    }
+        "model_dimensions": 1024,
+        "dimensions": PINECONE_INDEX_DIMENSIONS,
+    },
 }
 
-# Default embedding provider and model
-DEFAULT_EMBEDDING_PROVIDER = "openai"
-DEFAULT_EMBEDDING_MODEL = "text-embedding-3-small"
+# Default embedding provider and model (Nomic cloud API — no local GPU)
+DEFAULT_EMBEDDING_PROVIDER = "nomic"
+DEFAULT_EMBEDDING_MODEL = "nomic-embed-text-v1.5"
+
+SUPPORTED_EMBEDDING_PROVIDERS = list(EMBEDDING_PROVIDERS.keys())
 
 # Additional API Keys for other providers
 VOYAGE_API_KEY = os.getenv("VOYAGE_API_KEY", "")
 COHERE_API_KEY = os.getenv("COHERE_API_KEY", "")
+NOMIC_API_KEY = os.getenv("NOMIC_API_KEY", "")
 
 # Vector Database Configuration
 VECTOR_DB_CHUNK_SIZE = 2500
@@ -91,13 +113,26 @@ def get_llm_max_tokens() -> int:
     """Get LLM max tokens from environment or config"""
     return int(os.getenv("LLM_MAX_TOKENS", LLM_MAX_TOKENS))
 
+def get_ollama_base_url() -> str:
+    """Get Ollama API base URL from environment or config"""
+    return os.getenv("OLLAMA_BASE_URL", OLLAMA_BASE_URL)
+
 def get_embedding_model() -> str:
     """Get embedding model from environment or config"""
     return os.getenv("EMBEDDING_MODEL", EMBEDDING_MODEL)
 
 def get_embedding_dimensions() -> int:
-    """Get embedding dimensions from environment or config"""
+    """Vector dimension stored in Pinecone (index size)."""
     return int(os.getenv("EMBEDDING_DIMENSIONS", EMBEDDING_DIMENSIONS))
+
+def get_pinecone_index_dimensions() -> int:
+    """Pinecone index dimension — all providers align vectors to this size."""
+    return int(os.getenv("PINECONE_INDEX_DIMENSIONS", PINECONE_INDEX_DIMENSIONS))
+
+def get_provider_model_dimensions(provider: str) -> int:
+    """Native embedding length for a provider's default model."""
+    cfg = EMBEDDING_PROVIDERS.get(provider, {})
+    return int(cfg.get("model_dimensions", cfg.get("dimensions", get_pinecone_index_dimensions())))
 
 def get_vector_db_chunk_size() -> int:
     """Get vector database chunk size from environment or config"""
@@ -184,3 +219,7 @@ def get_voyage_api_key() -> str:
 def get_cohere_api_key() -> str:
     """Get Cohere API key from environment or config"""
     return os.getenv("COHERE_API_KEY", COHERE_API_KEY)
+
+def get_nomic_api_key() -> str:
+    """Get Nomic Atlas API key from environment or config"""
+    return os.getenv("NOMIC_API_KEY", NOMIC_API_KEY)

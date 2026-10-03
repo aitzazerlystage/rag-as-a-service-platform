@@ -18,6 +18,7 @@ from backend.crud import (
 )
 from backend.models import ProjectUpload
 from services.rag_insert_service import insert_text_into_rag
+from config.settings import get_default_embedding_provider
 
 router = APIRouter()
 
@@ -26,7 +27,7 @@ async def upload_files_for_processing(
     files: List[UploadFile] = File(...),
     insert_to_rag: bool = Form(True),
     metadata: Optional[str] = Form(None),
-    embedding_provider: str = Form("openai"),
+    embedding_provider: str = Form(get_default_embedding_provider()),
     embedding_model: Optional[str] = Form(None),
     auth=Depends(get_current_api_key),
     db: Session = Depends(get_db)
@@ -40,7 +41,7 @@ async def upload_files_for_processing(
     - files: List of files to process
     - insert_to_rag: If True (default), insert extracted text into RAG (Pinecone) after processing
     - metadata: Optional JSON string for RAG metadata (e.g. {"title":"My Doc","authors":"..."})
-    - embedding_provider: "openai", "voyageai", or "cohere" (default: openai)
+    - embedding_provider: "nomic", "openai", "voyageai", or "cohere" (default: nomic)
     - embedding_model: Optional model name (uses provider default if not specified)
 
     Supports: PDF, TXT, DOC, DOCX.
@@ -114,9 +115,11 @@ async def upload_files_for_processing(
         try:
             extra_metadata = json.loads(metadata) if isinstance(metadata, str) else metadata
         except json.JSONDecodeError:
+            print("❌ Upload rejected: metadata must be valid JSON")
             raise HTTPException(status_code=400, detail="metadata must be valid JSON")
     
     if not files:
+        print("❌ Upload rejected: No files provided (use multipart field name 'files')")
         raise HTTPException(status_code=400, detail="No files provided")
     
     # File size limit: 10MB
@@ -133,18 +136,22 @@ async def upload_files_for_processing(
         file.file.seek(0)  # Reset to beginning
         
         if file_size > MAX_FILE_SIZE:
-            raise HTTPException(
-                status_code=400,
-                detail=f"File {file.filename} exceeds 10MB limit. Size: {file_size / (1024*1024):.2f}MB"
+            detail = (
+                f"File {file.filename} exceeds 10MB limit. "
+                f"Size: {file_size / (1024*1024):.2f}MB"
             )
+            print(f"❌ Upload rejected: {detail}")
+            raise HTTPException(status_code=400, detail=detail)
         
         # Check file extension
-        ext = os.path.splitext(file.filename)[1].lower()
+        ext = os.path.splitext(file.filename or "")[1].lower()
         if ext not in allowed_exts:
-            raise HTTPException(
-                status_code=400,
-                detail=f"File {file.filename} has unsupported type. Allowed: {', '.join(sorted(allowed_exts))}"
+            detail = (
+                f"File {file.filename} has unsupported type '{ext or '(none)'}'. "
+                f"Allowed: {', '.join(sorted(allowed_exts))}"
             )
+            print(f"❌ Upload rejected: {detail}")
+            raise HTTPException(status_code=400, detail=detail)
     
     results = []
     

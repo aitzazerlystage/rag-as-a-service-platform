@@ -113,7 +113,7 @@ async def insert_text_into_rag(
     metadata: Dict[str, Any],
     auth: Dict[str, Any],
     db,
-    embedding_provider: str = "openai",
+    embedding_provider: Optional[str] = None,
     embedding_model: Optional[str] = None,
     endpoint_suffix: str = "vectors/insert",
 ) -> Dict[str, Any]:
@@ -127,7 +127,7 @@ async def insert_text_into_rag(
         metadata: Dict with at least "doc_id"; optional: title, filename, authors, etc.
         auth: Auth dict from get_current_api_key: { "api_key": obj, "subscription": obj }
         db: Database session
-        embedding_provider: "openai", "voyageai", or "cohere"
+        embedding_provider: "ollama", "openai", "voyageai", or "cohere"
         embedding_model: Optional model name (uses provider default if None)
         endpoint_suffix: For token usage recording (e.g. "vectors/insert", "vectors/upload")
 
@@ -137,6 +137,11 @@ async def insert_text_into_rag(
     Raises:
         HTTPException: On validation or quota errors
     """
+    from config.settings import SUPPORTED_EMBEDDING_PROVIDERS, get_default_embedding_provider
+
+    if embedding_provider is None:
+        embedding_provider = get_default_embedding_provider()
+
     pdf_text = (pdf_text or "").strip()
     if not pdf_text:
         raise HTTPException(status_code=400, detail="pdf_text is required")
@@ -145,10 +150,13 @@ async def insert_text_into_rag(
     if not doc_id:
         raise HTTPException(status_code=400, detail="metadata.doc_id is required")
 
-    if embedding_provider not in ["openai", "voyageai", "cohere"]:
+    if embedding_provider not in SUPPORTED_EMBEDDING_PROVIDERS:
         raise HTTPException(
             status_code=400,
-            detail=f"Unsupported embedding provider: {embedding_provider}. Supported: openai, voyageai, cohere",
+            detail=(
+                f"Unsupported embedding provider: {embedding_provider}. "
+                f"Supported: {', '.join(SUPPORTED_EMBEDDING_PROVIDERS)}"
+            ),
         )
 
     api_key_obj = auth["api_key"]

@@ -6,9 +6,9 @@ A PDF document processing and RAG chat application with a FastAPI backend and Re
 
 - **Python 3.10+**
 - **Node.js 18+** and **npm**
-- **OpenAI API key** (LLM: `gpt-4o`, Embeddings: `text-embedding-3-small`)
-- **Pinecone account** (cloud vector database)
+- **[Ollama](https://ollama.com/)** (local LLM — default model: `qwen3:4b-instruct`)
 - **Tesseract OCR** (optional, for image text extraction in PDFs)
+- API keys for external services you plan to use (see [Environment variables](#environment-variables))
 
 ## Setup
 
@@ -37,29 +37,25 @@ Create a `.env` file in the project root. At minimum, set the keys for the servi
 
 | Variable | Description |
 |---|---|
-| `OPENAI_API_KEY` | **Required** — OpenAI API key (used for LLM and embeddings) |
-| `PINECONE_API_KEY` | **Required** — Pinecone API key |
+| `NOMIC_API_KEY` | Nomic Atlas API key (default embedding provider) |
+| `PINECONE_API_KEY` | Pinecone API key |
 | `PINECONE_ENVIRONMENT` | Pinecone region (e.g. `us-east-1-aws`) |
-| `PINECONE_INDEX_NAME` | Pinecone index name (must match your index's dimensions) |
-| `VECTOR_DB_TYPE` | Vector DB backend — `pinecone` (default) or `local` |
-| `LLM_MODEL` | OpenAI model name (default: `gpt-4o`) |
+| `PINECONE_INDEX_NAME` | Pinecone index name |
+| `OLLAMA_BASE_URL` | Ollama server URL (default: `http://localhost:11434`) |
+| `LLM_MODEL` | Ollama model name (default: `qwen3:4b-instruct`) |
 | `SECRET_KEY` | JWT signing secret for auth |
 | `PORT` | Backend port (default: `8001`) |
 | `DATABASE_URL` | Database URL (default: `sqlite:///./chatbot.db`) |
 
-Optional provider keys for alternative embedding backends: `VOYAGE_API_KEY`, `COHERE_API_KEY`, `GOOGLE_API_KEY`, `ANTHROPIC_API_KEY`.
+Optional provider keys: `OPENAI_API_KEY`, `VOYAGE_API_KEY`, `COHERE_API_KEY`, `GOOGLE_API_KEY`, `ANTHROPIC_API_KEY`.
 
-Example `.env`:
+### 4. Pull the Ollama model
 
-```env
-OPENAI_API_KEY=sk-...
-PINECONE_API_KEY=pcsk_...
-PINECONE_ENVIRONMENT=us-east-1-aws
-PINECONE_INDEX_NAME=researchmedical
-VECTOR_DB_TYPE=pinecone
+```bash
+ollama pull qwen3:4b-instruct
 ```
 
-### 4. Install frontend dependencies
+### 5. Install frontend dependencies
 
 ```bash
 cd Frontend
@@ -125,23 +121,9 @@ If you are upgrading an existing `chatbot.db`, run migrations from the project r
 python migration.py
 ```
 
-## LLM & Embedding Configuration
-
-| Setting | Default | Notes |
-|---|---|---|
-| LLM Model | `gpt-4o` | Set via `LLM_MODEL` env var |
-| LLM Temperature | `0.3` | Set via `LLM_TEMPERATURE` env var |
-| LLM Max Tokens | `4000` | Set via `LLM_MAX_TOKENS` env var |
-| Embedding Provider | `openai` | Set via `DEFAULT_EMBEDDING_PROVIDER` |
-| Embedding Model | `text-embedding-3-small` | Set via `DEFAULT_EMBEDDING_MODEL` |
-| Embedding Dimensions | `1024` | Must match your Pinecone index |
-
-Alternative embedding providers supported: `voyageai`, `cohere`.
-
 ## Troubleshooting
 
 - **`npm not found`** — Install Node.js and ensure `npm` is on your PATH.
-- **OpenAI errors** — Verify your `OPENAI_API_KEY` is valid and has sufficient quota.
-- **Pinecone connection errors** — Check `PINECONE_API_KEY`, `PINECONE_ENVIRONMENT`, and `PINECONE_INDEX_NAME` are correctly set and the index exists with the right dimensions (1024).
+- **Ollama connection errors** — Make sure Ollama is running (`ollama serve`) and the model is pulled.
 - **Frontend cannot reach the API** — Confirm the backend is running and `VITE_API_URL` in `Frontend/.env` matches the backend port.
 - **OCR warnings** — Install Tesseract and add it to your PATH if you need image text extraction from PDFs.

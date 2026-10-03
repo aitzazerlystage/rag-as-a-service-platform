@@ -35,10 +35,8 @@ from backend.crud import (
 
 from pydantic import BaseModel, Field
 from typing import Literal
-from langchain_openai import ChatOpenAI
-
-
-
+from config.llm_factory import create_chat_llm
+from config.settings import get_default_embedding_provider
 
 
 class CheckGreeting(BaseModel):
@@ -47,10 +45,39 @@ class CheckGreeting(BaseModel):
         description="Indicates whether the input text is classified as a greeting ('yes') or not ('no')."
     )
 
+
 def check_greeting(text: str, openai_api_key: str) -> CheckGreeting:
-    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0, openai_api_key=openai_api_key)
-    llm_with_structured_output = llm.with_structured_output(CheckGreeting)
-    return llm_with_structured_output.invoke(text)
+    """Classify greeting vs content query using ChatOllama and the CheckGreeting schema."""
+    q = (text or "").strip()
+    if not q:
+        return CheckGreeting(greeting_classifier="no")
+
+    # llm = ChatOpenAI(model="gpt-4o-mini", temperature=0, openai_api_key=openai_api_key)
+    llm = create_chat_llm(temperature=0)
+    prompt = (
+        "Classify the user message.\n"
+        "- greeting_classifier \"yes\": ONLY brief greetings or small talk (hi, hello, how are you).\n"
+        "- greeting_classifier \"no\": any real question, topic, or request for information.\n\n"
+        f"User message: {q}"
+    )
+
+    try:
+        llm_with_structured_output = llm.with_structured_output(CheckGreeting)
+        return llm_with_structured_output.invoke(prompt)
+    except Exception as e:
+        print(f"WARNING: greeting structured output failed ({e}); parsing JSON from ChatOllama")
+        response = llm.invoke(prompt)
+        raw = (response.content or "").strip()
+        start, end = raw.find("{"), raw.rfind("}")
+        if start >= 0 and end > start:
+            try:
+                data = json.loads(raw[start : end + 1])
+                label = str(data.get("greeting_classifier", "no")).lower()
+                if label in ("yes", "no"):
+                    return CheckGreeting(greeting_classifier=label)
+            except json.JSONDecodeError:
+                pass
+        return CheckGreeting(greeting_classifier="no")
 
 router = APIRouter()
 
@@ -104,7 +131,7 @@ async def query_vector(
       "query_text": "search query",
       "study_id": "study_123",       # Optional: filter by specific study
       "knowledge_base_id": "kb_456", # Optional: filter by specific knowledge base
-      "embedding_provider": "openai",       # Optional: "openai", "voyageai", "cohere" (default: "openai")
+      "embedding_provider": "nomic",        # Optional: "nomic", "openai", "voyageai", "cohere" (default: nomic)
       "embedding_model": "text-embedding-3-small",  # Optional: specific model name (uses provider default if not specified)
       "llm_provider": "openai",             # Optional: "openai", "anthropic", "google" (default: "openai")
       "llm_model": "gpt-4o",                # Optional: specific model name (uses provider default if not specified)
@@ -136,8 +163,8 @@ async def query_vector(
         
         # If it's a greeting, use simple LLM for casual response
         if greeting_classifier.greeting_classifier == "yes":
-            # Create LLM instance with API key for this specific request
-            llm = ChatOpenAI(model="gpt-4o-mini", temperature=0, openai_api_key=openai_api_key)
+            # llm = ChatOpenAI(model="gpt-4o-mini", temperature=0, openai_api_key=openai_api_key)
+            llm = create_chat_llm(temperature=0)
             
             # Create a simple prompt for greeting responses
             greeting_prompt = "You are a helpful AI assistant. Respond to greetings and casual conversation in a friendly, professional manner. Keep responses brief and welcoming."
@@ -159,7 +186,7 @@ async def query_vector(
         
         # If not a greeting, proceed with full RAG workflow
         # Extract embedding parameters from request
-        embedding_provider = request.get("embedding_provider", "openai")
+        embedding_provider = request.get("embedding_provider", get_default_embedding_provider())
         embedding_model = request.get("embedding_model", None)
         
         # Extract LLM parameters from request
@@ -176,10 +203,15 @@ async def query_vector(
             include_history = "False"
 
         # Validate embedding provider
-        if embedding_provider not in ["openai", "voyageai", "cohere"]:
+        from config.settings import SUPPORTED_EMBEDDING_PROVIDERS
+
+        if embedding_provider not in SUPPORTED_EMBEDDING_PROVIDERS:
             raise HTTPException(
-                status_code=400, 
-                detail=f"Unsupported embedding provider: {embedding_provider}. Supported: openai, voyageai, cohere"
+                status_code=400,
+                detail=(
+                    f"Unsupported embedding provider: {embedding_provider}. "
+                    f"Supported: {', '.join(SUPPORTED_EMBEDDING_PROVIDERS)}"
+                ),
             )
         
         # Validate LLM provider
@@ -628,11 +660,12 @@ Return **ONLY** a JSON object in the following exact shape (without any markdown
             print(human_content)
             print("🔍 Sending relevance-filter prompt to LLM...")
 
-            llm_filter = ChatOpenAI(
-                model="gpt-4o-mini",
-                temperature=0,
-                openai_api_key=openai_api_key,
-            )
+            # llm_filter = ChatOpenAI(
+            #     model="gpt-4o-mini",
+            #     temperature=0,
+            #     openai_api_key=openai_api_key,
+            # )
+            llm_filter = create_chat_llm(temperature=0)
 
             filter_response = llm_filter.invoke([
                 SystemMessage(content=system_prompt),

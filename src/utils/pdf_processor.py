@@ -6,12 +6,13 @@ import os
 import base64
 import fitz  # PyMuPDF
 import pdfplumber
-from langchain_openai import ChatOpenAI
-from langchain.schema import Document
-from langchain.schema.messages import HumanMessage
+# from langchain_openai import ChatOpenAI
+from config.llm_factory import create_chat_llm
+from langchain_core.documents import Document
+from langchain_core.messages import HumanMessage
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
-from langchain_openai import OpenAIEmbeddings
+from config.chunking_embeddings import get_chunking_embeddings
 import time
 import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -43,21 +44,17 @@ OCR_CONFIDENCE_THRESHOLD = 0.6  # Minimum confidence score (0.0-1.0)
 from .vector_db_interface import get_vector_database
 from config.settings import get_vector_db_type, get_pinecone_api_key, get_pinecone_environment, get_pinecone_index_name
 
-# -------- SETUP OPENAI MODELS --------
-llm = ChatOpenAI(
-    model="gpt-4o",
-    temperature=0.2,
-    max_tokens=LLM_MAX_TOKENS,
-    api_key=OPENAI_API_KEY,
-)
+# -------- SETUP LOCAL OLLAMA LLM --------
+# llm = ChatOpenAI(
+#     model="gpt-4o",
+#     temperature=0.2,
+#     max_tokens=LLM_MAX_TOKENS,
+#     api_key=OPENAI_API_KEY,
+# )
+llm = create_chat_llm(max_tokens=LLM_MAX_TOKENS)
 
-# Setup embeddings for vector database
-# Using text-embedding-3-small for 1024 dimensions to match Pinecone index
-embeddings = OpenAIEmbeddings(
-    model="text-embedding-3-small",  # 1024 dimensions
-    api_key=OPENAI_API_KEY,
-    dimensions=1024 
-)
+# Setup embeddings for vector database (default provider from settings, e.g. Cohere)
+embeddings = get_chunking_embeddings()
 
 # Setup text splitter for chunking
 # OLD APPROACH: Recursive splitting

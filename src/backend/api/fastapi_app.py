@@ -70,9 +70,11 @@ from utils.pdf_processor import (
 
 # LangChain & Vector Store for vector storage and retrieval
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from config.chunking_embeddings import get_chunking_embeddings
+# from langchain_openai import OpenAIEmbeddings  # default via get_chunking_embeddings()
+# from langchain_openai import ChatOpenAI  # replaced by local Ollama via config.llm_factory
 from langchain_community.vectorstores import FAISS
-from langchain.schema import Document
+from langchain_core.documents import Document
 # Import Pinecone components
 try:
     from langchain_pinecone import PineconeVectorStore
@@ -220,13 +222,7 @@ app.include_router(dashboard_usage_router, prefix="/api", tags=["Dashboard"])
 # Global Embedding and Text Splitter Configuration
 # ================================
 
-# Uses text-embedding-3-small (1024 dimensions) for cost-efficiency and performance
-embeddings = OpenAIEmbeddings(
-    model="text-embedding-3-small",
-    api_key=OPENAI_API_KEY,
-    dimensions=1024  # Matches expected dimensionality in FAISS
-)
-
+embeddings = get_chunking_embeddings()
 
 from langchain_experimental.text_splitter import SemanticChunker
 text_splitter = SemanticChunker(

@@ -2,13 +2,14 @@
 LangGraph workflow for LLM processing with pre-retrieved context
 """
 
-from langchain_openai import ChatOpenAI
+# from langchain_openai import ChatOpenAI
+from config.llm_factory import create_chat_llm
 from langgraph.graph import StateGraph, START, END
 from typing import TypedDict, Annotated, List
 from langchain_core.messages import BaseMessage, HumanMessage, AIMessage
 from langgraph.graph.message import add_messages
 from langgraph.checkpoint.sqlite import SqliteSaver
-from langchain.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate
 import sqlite3
 import os
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -298,13 +299,18 @@ If the context includes tables in markdown format, always use the table data to 
 
         prompt = ChatPromptTemplate.from_template(template)
 
-        # Create OpenAI LLM instance
-        llm = ChatOpenAI(
+        # llm = ChatOpenAI(
+        #     model=model or LLM_MODEL,
+        #     temperature=LLM_TEMPERATURE,
+        #     max_tokens=LLM_MAX_TOKENS,
+        #     api_key=openai_api_key,
+        #     streaming=True
+        # )
+        llm = create_chat_llm(
             model=model or LLM_MODEL,
             temperature=LLM_TEMPERATURE,
             max_tokens=LLM_MAX_TOKENS,
-            api_key=openai_api_key,
-            streaming=True
+            streaming=True,
         )
         
         # Create the LLM chain with proper context injection
@@ -588,12 +594,16 @@ def llm_only_response_node(state: RagState, include_history: bool = True):
 
         prompt = ChatPromptTemplate.from_template(template)
         
-        # Create LLM instance with default settings
-        llm = ChatOpenAI(
+        # llm = ChatOpenAI(
+        #     model=LLM_MODEL,
+        #     temperature=LLM_TEMPERATURE,
+        #     max_tokens=LLM_MAX_TOKENS,
+        #     api_key=get_OPENAI_API_KEY(),
+        # )
+        llm = create_chat_llm(
             model=LLM_MODEL,
             temperature=LLM_TEMPERATURE,
             max_tokens=LLM_MAX_TOKENS,
-            api_key=get_OPENAI_API_KEY(),
         )
         
         llm_chain = (

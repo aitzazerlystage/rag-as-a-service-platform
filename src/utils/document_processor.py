@@ -9,7 +9,8 @@ import datetime
 import io
 from typing import Dict, Any, List
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_openai import ChatOpenAI
+# from langchain_openai import ChatOpenAI
+from config.llm_factory import create_chat_llm
 from langchain_core.messages import SystemMessage, HumanMessage
 
 # Global variables that will be imported from the main app
@@ -89,11 +90,16 @@ def process_non_pdf_file(file_path: str, filename: str) -> Dict[str, Any]:
                     image_count = len(picture_items)
 
                     if image_count > 0:
-                        vision_llm = ChatOpenAI(
+                        # vision_llm = ChatOpenAI(
+                        #     model=LLM_MODEL,
+                        #     temperature=LLM_TEMPERATURE,
+                        #     max_tokens=LLM_MAX_TOKENS,
+                        #     api_key=OPENAI_API_KEY
+                        # )
+                        vision_llm = create_chat_llm(
                             model=LLM_MODEL,
                             temperature=LLM_TEMPERATURE,
                             max_tokens=LLM_MAX_TOKENS,
-                            api_key=OPENAI_API_KEY
                         )
                         limit = min(image_count, MAX_CAPTION_IMAGES)
                         for idx in range(limit):
