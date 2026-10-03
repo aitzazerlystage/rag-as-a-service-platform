@@ -1,0 +1,73 @@
+================================================================================
+BOOK SHOP RAG — TEST QUESTIONS & EXPECTED ANSWERS (10 items, 2 per doc)
+================================================================================
+Use these to check RAG replies against the source docs 01–05 in this folder.
+
+--------------------------------------------------------------------------------
+DOC 1 — 01_bookshop_employees.txt
+--------------------------------------------------------------------------------
+
+Q1. Who is the CEO of the book shop?
+A1. Dr Arshad Iqbal.
+
+Q2. Who should staff escalate floor and customer service issues to among the general managers?
+A2. Aitzaz Ahmed (front-of-house GM). For stock, suppliers, and deliveries, Muhazzam Khan.
+
+--------------------------------------------------------------------------------
+DOC 2 — 02_bookshop_genres_and_titles.txt
+--------------------------------------------------------------------------------
+
+Q3. What is literary fiction mainly about?
+A3. Character, language, and theme (human experience), not plot alone.
+
+Q4. Name two prominent science fiction or fantasy titles listed for the shop.
+A4. Any two from: Dune; The Lord of the Rings; The Left Hand of Darkness; Neuromancer; The Name of the Wind.
+
+--------------------------------------------------------------------------------
+DOC 3 — 03_bookshop_policies_customer_service.txt
+--------------------------------------------------------------------------------
+
+Q5. Within how many days can a customer get a full refund or exchange for a book in resale condition with proof?
+A5. 14 days from purchase.
+
+Q6. Who handles loyalty programme disputes at GM level?
+A6. Aitzaz Ahmed.
+
+--------------------------------------------------------------------------------
+DOC 4 — 04_bookshop_hours_location_delivery.txt
+--------------------------------------------------------------------------------
+
+Q7. What are Sunday opening hours?
+A7. 12:00–18:00.
+
+Q8. How long is click-and-collect held after a “Ready” message unless extended?
+A8. 10 business days (one extension up to 7 days, GM-approved in busy season).
+
+--------------------------------------------------------------------------------
+DOC 5 — 05_bookshop_ordering_inventory_faq.txt
+--------------------------------------------------------------------------------
+
+Q9. What is the usual timeline for in-print special orders from local distributor stock?
+A9. About 7–14 business days after confirmed order and deposit.
+
+Q10. What minimum deposit applies to special orders under Rs 15,000 list price (standard case)?
+A10. 50% minimum (100% for POD, imports, or flagged non-returnable orders).
+
+================================================================================
+QUICK INDEX
+================================================================================
+#  Doc  Question (one line)
+1  1    Who is the CEO?
+2  1    Which GM handles front-of-house / service escalation?
+3  2    What is literary fiction about?
+4  2    Two SF/F titles from the doc?
+5  3    Return window with proof?
+6  3    Who handles loyalty disputes at GM level?
+7  4    Sunday hours?
+8  4    Click-and-collect hold after “Ready”?
+9  5    Typical special-order days (in-print)?
+10 5    Deposit rule under Rs 15,000?
+
+================================================================================
+END OF FILE
+================================================================================

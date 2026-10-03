@@ -1,0 +1,113 @@
+================================================================================
+BOOK SHOP — ORDERING & INVENTORY FAQ (DOC 5 — FOR RAG / KNOWLEDGE BASE)
+================================================================================
+How special orders, deposits, ISBN requests, and bulk/school discounts work.
+Pairs with Doc 1 (roles), Doc 3 (returns on special orders), and Doc 4
+(delivery).
+
+--------------------------------------------------------------------------------
+SPECIAL ORDERS — TIMELINES
+--------------------------------------------------------------------------------
+• UK/US English editions in print with local distributor stock: typically 7–14
+  business days from confirmed order and deposit.
+• Print-on-demand or overseas-only titles: 3–8 weeks; customer told upfront.
+• Academic / technical imports: highly variable; we quote a range and update
+  when the supplier confirms.
+• Rush where available: Extra courier fee; not all titles can be rushed.
+
+If a supplier cancels, full deposit refund unless the customer agrees to swap
+to another edition we can source.
+
+--------------------------------------------------------------------------------
+DEPOSITS & PAYMENT
+--------------------------------------------------------------------------------
+• Standard deposit: 50% minimum for special orders under Rs 15,000 list; 100%
+  deposit for POD, imports, or orders we flag as “non-returnable to us.”
+• Balance due on pickup or before dispatch; 10-day grace after “Arrived”
+  notice, then storage fee may apply (small weekly fee — GM discretion).
+• Payment methods: Card, bank transfer, cash; school POs handled per Schools
+  section below.
+
+Who sets exceptions: Muhazzam Khan (GM Operations) with Priya Nair (Accounts)
+for invoicing.
+
+--------------------------------------------------------------------------------
+ISBN & EDITION ACCURACY
+--------------------------------------------------------------------------------
+• Best practice: Customer provides ISBN-13 from the publisher or university
+  reading list. We match imprint, year, and binding (paperback vs hardback).
+• If only title + author are given: We confirm cover image and edition on email
+  before ordering to avoid wrong syllabus editions.
+• Multi-volume sets: Quote per volume or boxed set explicitly.
+
+Who handles: Head Librarian (Zara Hameed) or Assistant Librarian (Omar Siddiqui)
+for research; Front Desk enters the order once confirmed.
+
+--------------------------------------------------------------------------------
+IN-STOCK & REORDER FREQUENCY
+--------------------------------------------------------------------------------
+• Fast movers (bestsellers, exam seasons): Weekly restock cycle where suppliers
+  allow; gap-fill mid-week for top SKUs.
+• Deep backlist: Ordered on customer request or librarian recommendation —
+  not kept on shelf unless demand justifies it.
+
+Who manages reorder points: Muhazzam Khan with Daniyal Raza (Inventory).
+
+--------------------------------------------------------------------------------
+BULK, SCHOOLS & INSTITUTIONAL DISCOUNTS
+--------------------------------------------------------------------------------
+• Schools / libraries / NGOs: Tiered percentage off list for qualifying bulk
+  (minimum quantities by category — e.g. classroom sets 15+ identical copies).
+  Official letterhead or purchase order may be required for invoiced accounts.
+• Book clubs (registered): Modest standing discount on bulk single-title
+  orders; events coordinated with James Okafor (marketing) and Zara Hameed.
+• Not-for-resale inspection copies: Limited; Head Librarian + GM Front of
+  House (Aitzaz Ahmed) approval; not for personal resale.
+
+Who negotiates large deals: Aitzaz Ahmed for relationship and service terms;
+Muhazzam Khan for price/margin and delivery; CEO for contracts above delegated
+limits (internal finance sheet, not duplicated here).
+
+--------------------------------------------------------------------------------
+HOLDS & TRANSFERS BETWEEN BRANCHES (IF APPLICABLE)
+--------------------------------------------------------------------------------
+• This FAQ assumes a single main branch. If a second branch opens, transfers
+  add 2–4 business days and may incur a small transfer fee — update this file.
+
+--------------------------------------------------------------------------------
+DAMAGED OR SHORT-SUPPLIED DELIVERIES (INVENTORY SIDE)
+--------------------------------------------------------------------------------
+• Receiving logs discrepancies same day; customer orders affected get priority
+  message from Front Desk or Inventory.
+• Credits from suppliers are tracked by Accounts (Priya Nair).
+
+--------------------------------------------------------------------------------
+CUSTOMER-FACING FAQ (SHORT ANSWERS)
+--------------------------------------------------------------------------------
+Q: How long will my special order take?
+A: We quote a range when you pay the deposit; most in-print titles arrive in
+   7–14 business days unless import/POD.
+
+Q: Why do you need the ISBN?
+A: So you receive the exact edition your course or book club requires.
+
+Q: Can I cancel a special order?
+A: Only before we transmit to the supplier; after that, fees may apply if the
+   supplier will not cancel (we explain at order time).
+
+Q: Do you offer school discounts?
+A: Yes for qualifying bulk; speak to Aitzaz Ahmed or email schools@ address
+   on Doc 4 with your list.
+
+Q: Who do I ask about a late delivery?
+A: Front Desk first; they escalate to Muhazzam Khan with your tracking number.
+
+--------------------------------------------------------------------------------
+STAFF RAG HINTS
+--------------------------------------------------------------------------------
+• “Deposit policy” — this doc + Doc 3 non-returnable rule for special orders.
+• “Wrong edition arrived” — supplier correction; Zara + Inventory + customer.
+
+================================================================================
+END OF DOCUMENT 5 (ORDERING & INVENTORY FAQ)
+================================================================================

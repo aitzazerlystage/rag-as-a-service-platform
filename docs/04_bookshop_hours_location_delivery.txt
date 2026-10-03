@@ -1,0 +1,98 @@
+================================================================================
+BOOK SHOP — HOURS, LOCATION, CONTACT & DELIVERY (DOC 4 — FOR RAG / KNOWLEDGE BASE)
+================================================================================
+Factual reference for when we are open, how to reach us, parking, and how
+orders reach customers. Replace placeholder contact strings with live details
+before production use.
+
+--------------------------------------------------------------------------------
+TRADING NAME & MAIN BRANCH
+--------------------------------------------------------------------------------
+Public name: City Centre Bookshop (Main Branch)
+Description: Full-range independent bookshop — fiction, non-fiction, children’s,
+gifts, and special orders.
+
+--------------------------------------------------------------------------------
+ADDRESS & FINDING US
+--------------------------------------------------------------------------------
+Street address (sample for knowledge base — update before go-live):
+Ground Floor, Units 2–4, The Arcade, 88 Station Road, Model Town, Lahore.
+
+Landmarks: Adjacent to the Model Town metro/bus interchange; entrance under the
+glass “Arcade” canopy. Children’s section is at the back left; information desk
+faces the main doors.
+
+Accessibility: Step-free street entrance; wide aisles; one accessible WC on
+the same floor (key from Front Desk). Quiet browsing encouraged weekday
+mornings.
+
+--------------------------------------------------------------------------------
+OPENING HOURS (STANDARD WEEKS)
+--------------------------------------------------------------------------------
+Monday–Thursday: 10:00 – 20:00
+Friday: 10:00 – 21:00 (late evening shopping)
+Saturday: 10:00 – 21:00
+Sunday: 12:00 – 18:00
+
+Exceptions:
+• Public holidays: Open 12:00 – 18:00 unless a “Closed” notice is posted on the
+  door and website; Eid days may vary — check the holiday banner.
+• Inventory stock-take: One announced Sunday per quarter — closed or reduced
+  hours; posted two weeks ahead.
+• Private events after hours: Shop floor may close on time while events run in
+  the mezzanine — signage at entrance.
+
+--------------------------------------------------------------------------------
+CONTACT (SAMPLE — REPLACE WITH LIVE DETAILS)
+--------------------------------------------------------------------------------
+Main customer line: +92-21-5550-2400 (demo placeholder)
+Customer service email: hello@bookshop.example (RFC reserved domain — replace)
+Schools & bulk enquiries: schools@bookshop.example
+WhatsApp (orders/status only): published on receipt footer and window sticker
+
+Social: Handles used for events and hours changes — do not quote a specific
+handle in this file; staff should give the current QR on the counter.
+
+--------------------------------------------------------------------------------
+PARKING & COLLECTION
+--------------------------------------------------------------------------------
+• Customer parking: 20 paid bays behind The Arcade (first hour often validated
+  at till for purchases over a posted threshold — ask GM for current promo).
+• Bicycles: Rack at the north side of the building.
+• Click-and-collect: Yes. Order online or by phone; pickup at Front Desk with
+  order code and ID. Hold time: 10 business days after “Ready” SMS/email, then
+  return to stock unless customer requests extension (one extension, max 7
+  days, GM-approved if busy season).
+
+--------------------------------------------------------------------------------
+DELIVERY OPTIONS
+--------------------------------------------------------------------------------
+• Local bicycle courier (same city, selected postcodes): Next working day for
+  orders accepted before 14:00; fee tiered by distance (see checkout or till
+  card). Signature or building reception may be required.
+• Nationwide courier (partner TCS-style service): 2–5 business days typical;
+  tracking number issued when dispatched. Rural areas may add 1–2 days.
+• Heavy boxes / school pallets: Quoted separately; arranged by GM Operations
+  (Muhazzam Khan) with Inventory.
+• International: Not offered by default; exceptions by CEO approval only.
+
+Delivery problems: Customer contacts us first; Front Desk logs the case. If the
+courier is at fault, GM Operations coordinates compensation per courier SLA.
+
+--------------------------------------------------------------------------------
+IN-STORE SERVICES (QUICK)
+--------------------------------------------------------------------------------
+• Gift wrapping: Small fee or free above a threshold (seasonal — ask till).
+• Hold shelf: 48-hour informal holds; paid deposits extend per Doc 5.
+
+--------------------------------------------------------------------------------
+WHO TO ASK (CROSS-REFERENCE)
+--------------------------------------------------------------------------------
+• Hours / holiday confirmation — Front Desk or James Okafor (marketing posts).
+• Address / directions — Front Desk.
+• Delivery quote or delay — Front Desk → Muhazzam Khan if courier dispute.
+• Click-and-collect status — Front Desk with order code.
+
+================================================================================
+END OF DOCUMENT 4 (HOURS, LOCATION, CONTACT & DELIVERY)
+================================================================================

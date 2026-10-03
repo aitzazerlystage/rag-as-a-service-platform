@@ -1,0 +1,115 @@
+================================================================================
+BOOK SHOP — STORE POLICIES & CUSTOMER SERVICE (DOC 3 — FOR RAG / KNOWLEDGE BASE)
+================================================================================
+Authoritative answers for returns, receipts, damaged goods, special orders,
+gift cards, loyalty, and complaints. Front desk follows this; exceptions need
+GM or CEO approval as stated below.
+
+--------------------------------------------------------------------------------
+RETURNS & EXCHANGES (GENERAL)
+--------------------------------------------------------------------------------
+• Time window: Full refund or exchange within 14 days of purchase for items
+  in original resale condition (unmarked, unbent, no sticker residue, no
+  personal inscriptions unless sold as “signed”).
+• Proof: Original receipt OR loyalty-linked transaction OR card/bank reference
+  we can match in the POS. Without proof, exchanges may be offered at manager
+  discretion as store credit only.
+• Sale / clearance: Marked “Final sale” or below-cost clearance — no refund;
+  exchange for same section only within 7 days if defective (see Damaged).
+• Opened shrink-wrap: Treat as used; no refund unless defective. Sealed media
+  (if stocked) follows the same rule once opened.
+• Gift purchases: Refund to original payment method when receipt holder
+  presents receipt; otherwise store credit to the person returning the item.
+
+Who handles: Front Desk (Leila Farouk). Disputes: General Manager — Front of
+House (Aitzaz Ahmed).
+
+--------------------------------------------------------------------------------
+RECEIPTS & TRANSACTION LOOKUPS
+--------------------------------------------------------------------------------
+• Email receipts: Offered at checkout; resend from POS within 90 days where
+  the system retains the record.
+• Lost receipt: We can attempt lookup by loyalty ID, date, and approximate
+  time of day, or by card last four digits. Not guaranteed for cash sales
+  without loyalty.
+
+Who handles: Front Desk. Escalation for POS failures: Elena Volkov (IT) with GM
+if systems are down for more than one business day.
+
+--------------------------------------------------------------------------------
+DAMAGED OR DEFECTIVE GOODS
+--------------------------------------------------------------------------------
+• Customer damaged after leaving store: Not eligible unless a manufacturing
+  defect appears within 14 days (e.g. missing signatures, wrong ISBN, pages
+  glued shut). Head Librarian or GM may inspect.
+• In-store or courier damage: Replace or refund; we log the incident. Photos
+  help for courier claims.
+• Print / binding defects: Exchange or refund; supplier return arranged by
+  Inventory (Daniyal Raza) with GM Operations (Muhazzam Khan) when bulk.
+
+Who handles: Front Desk first; Inventory + GM Operations for supplier returns.
+
+--------------------------------------------------------------------------------
+SPECIAL ORDERS (POLICY SUMMARY)
+--------------------------------------------------------------------------------
+• Special orders are non-returnable unless we supplied the wrong title/edition
+  or the supplier cancels. Customer is told this at deposit time.
+• Deposits, timelines, and ISBN rules: see Doc 5 (Ordering & Inventory FAQ).
+
+Who advises customers: Head Librarian (Zara Hameed) or Front Desk with Zara on
+complex queries. GM Operations approves unusual supplier terms.
+
+--------------------------------------------------------------------------------
+GIFT CARDS
+--------------------------------------------------------------------------------
+• Sold in fixed denominations; redeemable for merchandise only (not for cash).
+• Balance enquiries at till or by email to accounts with receipt reference.
+• Lost cards: Treat like cash — not replaceable unless registered to loyalty at
+  purchase (promote registration at sale).
+• Expiry: Gift cards valid for 24 months from purchase date unless local law
+  requires longer (extend to legal minimum).
+
+Who handles: Front Desk; accounting queries on bulk corporate cards — Priya
+Nair with GM approval.
+
+--------------------------------------------------------------------------------
+LOYALTY PROGRAMME
+--------------------------------------------------------------------------------
+• Points accrue on eligible purchases (excludes gift card purchase, some
+  services, wholesale invoices). Returns reverse points from that sale.
+• Tier benefits (early sale access, event RSVP priority) are published on the
+  loyalty poster and newsletter.
+• Data: Customers may request a loyalty statement; corrections go through Front
+  Desk then Accounts if billing-related.
+
+Who handles: Front Desk (Leila Farouk). Programme disputes — Aitzaz Ahmed.
+
+--------------------------------------------------------------------------------
+COMPLAINTS & ESCALATION
+--------------------------------------------------------------------------------
+Level 1 — Front Desk: Service wait times, wrong change, rude tone, simple
+product mix-ups. Aim to resolve same visit.
+
+Level 2 — General Manager:
+• Service standards, staff conduct, loyalty disputes, layout/access —
+  Aitzaz Ahmed (Front of House GM).
+• Delivery delays, supplier mix-ups, stock damage patterns, courier issues —
+  Muhazzam Khan (Operations GM).
+
+Level 3 — CEO: Legal threats, media/social escalation, discrimination or safety
+allegations, requests involving law enforcement, or any matter involving
+potential reputational or financial exposure — Dr Arshad Iqbal.
+
+Written complaints: Offer email to the shop (see Doc 4); acknowledge within 2
+business days. Keep a brief incident log at the till for Level 2+.
+
+--------------------------------------------------------------------------------
+NOTES FOR STAFF (RAG HINTS)
+--------------------------------------------------------------------------------
+• “Can I return this?” — Check date, condition, sale sticker, receipt, section.
+• “My book arrived damaged” — Doc 4 delivery + this doc’s Damaged section.
+• “I want to speak to a manager” — Aitzaz for service; Muhazzam for stock/shipping.
+
+================================================================================
+END OF DOCUMENT 3 (POLICIES & CUSTOMER SERVICE)
+================================================================================

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Magical BookStore — Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body class="page--home">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <a class="site-logo" href="/">
+        <span class="site-logo-mark" aria-hidden="true">✦</span>
+        <span class="site-logo-text site-logo-text--magical">Magical BookStore</span>
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="/" class="nav-link is-active">Home</a>
+        <a href="/upload" class="nav-link">Upload to RAG</a>
+      </nav>
+    </header>
+
+    <main id="main" class="page">
+      <section class="hero hero--books">
+        <div class="hero-copy">
+          <p class="eyebrow">Independent bookstore</p>
+          <h1>Stories worth shelving — and searching.</h1>
+          <p>
+            Browse our shopfront demo. Use <strong>Upload to RAG</strong> to add documents to the vector index.
+            Tap the corner button anytime to chat with the shop assistant (same warm palette as the store).
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="/upload">Upload to RAG</a>
+            <button type="button" class="btn btn-ghost" id="heroOpenChat">Open assistant</button>
+          </div>
+        </div>
+        <div class="hero-card hero-card--shelf">
+          <h3>Tonight’s picks</h3>
+          <ul>
+            <li>Staff picks: fiction floor display</li>
+            <li>Special orders &amp; hold shelf</li>
+            <li>Reading room hours — ask the assistant</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="dummy-content">
+        <article class="dummy-panel">
+          <h2>New arrivals</h2>
+          <p>
+            Fresh titles land every week. This block is placeholder copy for your bookstore landing; navigation and
+            the RAG upload flow live on dedicated routes.
+          </p>
+        </article>
+        <article class="dummy-panel">
+          <h2>Community</h2>
+          <p>Author readings, children’s story hour, and local history archives — all part of the Magical BookStore demo.</p>
+        </article>
+        <article class="dummy-panel">
+          <h2>Our shelves</h2>
+          <p>Fiction, essays, cookbooks, and a quiet corner for study. Colors and type echo a classic shop.</p>
+        </article>
+      </section>
+    </main>
+
+    <button type="button" class="chat-fab" id="chatFab" aria-label="Open shop assistant" aria-expanded="false" aria-controls="chatOverlay">
+      <span class="chat-fab-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"
+            fill="currentColor"
+          />
+        </svg>
+      </span>
+      <span class="chat-fab-label">Chat</span>
+    </button>
+
+    <div class="chat-overlay" id="chatOverlay" aria-hidden="true">
+      <button type="button" class="chat-overlay-backdrop" id="chatBackdrop" tabindex="-1" aria-label="Close assistant"></button>
+      <aside class="chat-panel" role="dialog" aria-modal="true" aria-labelledby="chatTitle">
+        <div class="chat-surface">
+          <header class="chat-head">
+            <div class="chat-brand">
+              <div class="chat-avatar" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08s5.97 1.09 6 3.08c-1.29 1.94-3.5 3.22-6 3.22z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <div class="chat-brand-text">
+                <h2 id="chatTitle">Shop assistant</h2>
+                <p class="chat-tagline">Magical BookStore assistant · <code>/api/rag/query</code></p>
+              </div>
+            </div>
+            <div class="chat-head-actions">
+              <button type="button" class="btn btn-new" id="btnNewChat" title="Start a new conversation">New chat</button>
+              <button type="button" class="btn btn-close-chat" id="btnCloseChat" title="Close">✕</button>
+            </div>
+          </header>
+
+          <div class="chat-status">
+            <div class="status-row">
+              <span class="status-dot" id="keyStatusDot" title="API key status"></span>
+              <span class="status-label" id="keyStatusText">Checking…</span>
+            </div>
+            <p class="status-base" id="ragBaseLabel">—</p>
+            <p id="threadPill" class="thread-pill">No active thread</p>
+          </div>
+
+          <details class="chat-history" id="chatHistoryDetails">
+            <summary class="chat-history-summary">
+              <span class="chat-history-summary-text">Past conversations</span>
+              <span class="chat-history-count" id="chatHistoryCount" hidden></span>
+            </summary>
+            <div class="chat-history-inner">
+              <div class="chat-history-toolbar">
+                <button type="button" class="btn-chat-refresh" id="btnRefreshChats">Refresh</button>
+              </div>
+              <div id="chatHistoryList" class="chat-history-list" role="list" aria-label="Previous chat threads"></div>
+            </div>
+          </details>
+
+          <div id="messages" class="messages"></div>
+
+          <div class="composer-wrap">
+            <p class="composer-hint">Chat only — uploads are on the <a href="/upload">Upload to RAG</a> page.</p>
+            <div class="composer">
+              <textarea id="msgInput" rows="1" placeholder="Ask about your documents…"></textarea>
+              <button type="button" class="icon-btn send" id="btnSend" title="Send">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <details class="raw-panel">
+            <summary>Raw API output</summary>
+            <pre id="rawOut">—</pre>
+          </details>
+        </div>
+      </aside>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
+    <script src="/static/script.js"></script>
+  </body>
+</html>
